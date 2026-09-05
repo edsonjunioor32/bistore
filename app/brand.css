@@ -1,0 +1,58 @@
+:root {
+  --background: #fff7f3;
+  --foreground: #1d1c1b;
+  --muted: #806962;
+  --card: #fffdfb;
+  --border: #efd8cf;
+  --soft: #fbe9e2;
+  --danger: #b94d42;
+  --bi-peach: #efc9ba;
+  --bi-pink: #eda198;
+  --bi-coral: #e76c5f;
+  --bi-ink: #1d1c1b;
+  --bi-cream: #fff7f3;
+}
+
+body {
+  background:
+    radial-gradient(circle at 90% 0%, rgba(237, 161, 152, .20), transparent 28%),
+    radial-gradient(circle at 8% 98%, rgba(231, 108, 95, .11), transparent 24%),
+    var(--background);
+}
+
+.appRoot {
+  background:
+    radial-gradient(circle at 88% 4%, rgba(237, 161, 152, .16), transparent 26%),
+    radial-gradient(circle at 6% 94%, rgba(239, 201, 186, .24), transparent 26%),
+    var(--background);
+}
+
+.sidebar {
+  color: var(--bi-ink);
+  background:
+    radial-gradient(circle at -10% 86%, rgba(231, 108, 95, .75) 0 14%, transparent 14.4%),
+    radial-gradient(circle at 116% 18%, rgba(237, 161, 152, .95) 0 30%, transparent 30.4%),
+    linear-gradient(165deg, #f4d7ca 0%, #efc9ba 52%, #efb8ae 100%);
+  border-right: 1px solid rgba(29, 28, 27, .08);
+}
+
+.storeMark {
+  flex-direction: column;
+  align-items: stretch;
+  gap: 8px;
+  padding: 9px;
+  border: 1px solid rgba(255,255,255,.46);
+  border-radius: 18px;
+  background: rgba(255,255,255,.22);
+  box-shadow: 0 12px 28px rgba(116, 66, 58, .08);
+}
+
+.logoDot {
+  width: 100%;
+  height: 108px;
+  display: block;
+  border-radius: 14px;
+  color: transparent;
+  overflow: hidden;
+  background-color: #efc9ba;
+  background-image: url("data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAkGBwgHBgkIBwgKCgkLDRYPDQwMDR
