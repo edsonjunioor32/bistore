@@ -1,0 +1,192 @@
+.wrapper { min-height: 100vh; }
+
+.menuButton {
+  position: fixed;
+  z-index: 22;
+  left: 14px;
+  bottom: 72px;
+  width: 207px;
+  min-height: 39px;
+  border: 1px solid rgba(255, 255, 255, .16);
+  border-radius: 9px;
+  background: rgba(255, 255, 255, .1);
+  color: #fff;
+  font: inherit;
+  font-size: 12px;
+  font-weight: 800;
+  cursor: pointer;
+  backdrop-filter: blur(4px);
+}
+
+.menuButton:hover { background: rgba(255, 255, 255, .17); }
+
+.modalBackdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: grid;
+  place-items: center;
+  padding: 22px;
+  background: rgba(15, 23, 42, .62);
+  backdrop-filter: blur(5px);
+}
+
+.modal {
+  width: min(1180px, 100%);
+  max-height: calc(100vh - 44px);
+  overflow: auto;
+  border: 1px solid #e5e7eb;
+  border-radius: 18px;
+  background: #f8fafc;
+  color: #111827;
+  box-shadow: 0 28px 80px rgba(15, 23, 42, .28);
+}
+
+.modalHeader {
+  position: sticky;
+  top: 0;
+  z-index: 3;
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 22px 24px 18px;
+  border-bottom: 1px solid #e5e7eb;
+  background: rgba(248, 250, 252, .96);
+  backdrop-filter: blur(10px);
+}
+
+.modalHeader span {
+  display: block;
+  margin-bottom: 4px;
+  color: #64748b;
+  font-size: 10px;
+  font-weight: 900;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+}
+
+.modalHeader h1 { margin: 0; font-size: 28px; letter-spacing: -.035em; }
+.modalHeader p { margin: 7px 0 0; max-width: 760px; color: #64748b; font-size: 12px; line-height: 1.5; }
+.closeButton { width: 36px; height: 36px; border: 1px solid #e2e8f0; border-radius: 9px; background: #fff; color: #475569; font-size: 22px; cursor: pointer; }
+
+.toolbar {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 14px;
+  padding: 18px 24px 0;
+}
+
+.searchField { display: grid; gap: 6px; flex: 1; }
+.searchField span, .quantityField span, .stockInfo span { color: #64748b; font-size: 9px; font-weight: 800; letter-spacing: .05em; text-transform: uppercase; }
+.searchField input { width: 100%; min-height: 40px; padding: 0 12px; border: 1px solid #dbe3ec; border-radius: 9px; background: #fff; color: #0f172a; outline: none; }
+.searchField input:focus { border-color: #94a3b8; box-shadow: 0 0 0 3px rgba(148, 163, 184, .14); }
+.toolbarActions { display: flex; gap: 8px; flex-wrap: wrap; }
+.toolbarActions button { min-height: 40px; padding: 0 12px; border: 1px solid #dbe3ec; border-radius: 9px; background: #fff; color: #334155; font: inherit; font-size: 11px; font-weight: 800; cursor: pointer; }
+
+.contentGrid { display: grid; grid-template-columns: minmax(0, 1.55fr) minmax(320px, .75fr); gap: 16px; padding: 18px 24px 24px; }
+.productPanel, .previewPanel { border: 1px solid #e2e8f0; border-radius: 14px; background: #fff; }
+.productPanel { min-width: 0; overflow: hidden; }
+.previewPanel { align-self: start; padding: 16px; }
+.sectionHeader { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 14px 16px; border-bottom: 1px solid #eef2f7; }
+.previewPanel .sectionHeader { padding: 0 0 12px; }
+.sectionHeader strong { font-size: 13px; }
+.sectionHeader span { color: #64748b; font-size: 10px; }
+
+.productList { max-height: 56vh; overflow: auto; }
+.productRow { display: grid; grid-template-columns: minmax(0, 1fr) 70px 88px; gap: 14px; align-items: center; padding: 12px 16px; border-bottom: 1px solid #eef2f7; }
+.productRow:last-child { border-bottom: 0; }
+.productCheck { display: flex; align-items: flex-start; gap: 10px; min-width: 0; cursor: pointer; }
+.productCheck input { margin-top: 3px; }
+.productCheck span { min-width: 0; }
+.productCheck strong, .productCheck small { display: block; }
+.productCheck strong { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: 12px; }
+.productCheck small { margin-top: 3px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; color: #64748b; font-size: 10px; }
+.stockInfo { display: grid; gap: 2px; text-align: center; }
+.stockInfo strong { font-size: 13px; }
+.quantityField { display: grid; gap: 4px; }
+.quantityField input { width: 100%; min-height: 34px; padding: 0 8px; border: 1px solid #dbe3ec; border-radius: 8px; background: #fff; color: #0f172a; }
+.quantityField input:disabled { background: #f1f5f9; color: #94a3b8; }
+.empty { min-height: 120px; display: grid; place-items: center; padding: 20px; text-align: center; color: #64748b; font-size: 11px; }
+
+.fieldOptions { display: flex; flex-wrap: wrap; gap: 7px; padding: 12px 0 14px; }
+.fieldOptions label { display: flex; align-items: center; gap: 5px; padding: 6px 8px; border: 1px solid #e2e8f0; border-radius: 999px; background: #f8fafc; color: #475569; font-size: 9px; font-weight: 700; }
+.previewLabels { display: grid; gap: 10mm; justify-content: center; padding: 16px 0; border: 1px dashed #cbd5e1; border-radius: 12px; background: #f8fafc; max-height: 330px; overflow: auto; }
+.moreLabels { display: block; margin-top: 8px; color: #64748b; font-size: 9px; text-align: center; }
+
+.thermalLabel {
+  width: 40mm;
+  height: 20mm;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 1.1mm 1.4mm 1mm;
+  border: .25mm solid #d1d5db;
+  background: #fff;
+  color: #000;
+  font-family: Arial, Helvetica, sans-serif;
+  line-height: 1.05;
+}
+.labelStore { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: 5.5pt; font-weight: 700; letter-spacing: .03em; text-transform: uppercase; }
+.labelName { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: 8.2pt; font-weight: 900; }
+.labelVariation { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: 5.8pt; }
+.labelFooter { display: flex; align-items: end; justify-content: space-between; gap: 2mm; min-width: 0; }
+.labelFooter span { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: 5.2pt; }
+.labelFooter strong { flex: 0 0 auto; font-size: 8pt; }
+
+.printSummary { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-top: 14px; }
+.printSummary div { padding: 9px; border-radius: 9px; background: #f1f5f9; }
+.printSummary span, .printSummary strong { display: block; }
+.printSummary span { color: #64748b; font-size: 8px; text-transform: uppercase; }
+.printSummary strong { margin-top: 3px; font-size: 11px; }
+.printButton { width: 100%; min-height: 42px; margin-top: 12px; border: 0; border-radius: 9px; background: #111827; color: #fff; font: inherit; font-size: 12px; font-weight: 900; cursor: pointer; }
+.printButton:disabled { opacity: .38; cursor: not-allowed; }
+.printHint { margin: 8px 0 0; color: #64748b; font-size: 9px; line-height: 1.45; }
+.printArea { display: none; }
+
+@media (max-width: 1100px) {
+  .menuButton { width: 177px; }
+  .contentGrid { grid-template-columns: 1fr; }
+  .productList { max-height: 40vh; }
+}
+
+@media (max-width: 760px) {
+  .menuButton {
+    left: auto;
+    right: 14px;
+    bottom: 14px;
+    width: auto;
+    min-width: 108px;
+    padding: 0 15px;
+    background: #111827;
+    box-shadow: 0 12px 28px rgba(15, 23, 42, .2);
+  }
+  .modalBackdrop { padding: 0; place-items: stretch; }
+  .modal { width: 100%; max-height: 100vh; min-height: 100vh; border: 0; border-radius: 0; }
+  .modalHeader { padding: 17px 16px 14px; }
+  .modalHeader h1 { font-size: 23px; }
+  .toolbar { align-items: stretch; flex-direction: column; padding: 14px 16px 0; }
+  .toolbarActions { display: grid; grid-template-columns: 1fr 1fr; }
+  .contentGrid { padding: 14px 16px 24px; }
+  .productRow { grid-template-columns: minmax(0, 1fr) 58px 76px; gap: 8px; padding: 11px; }
+  .previewPanel { padding: 13px; }
+}
+
+@media print {
+  @page { size: 40mm 30mm; margin: 0; }
+
+  :global(html), :global(body) {
+    width: 40mm !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    background: #fff !important;
+  }
+
+  :global(.appRoot), .menuButton, .modalBackdrop { display: none !important; }
+  .wrapper { min-height: 0; }
+  .printArea { display: block !important; width: 40mm; margin: 0; padding: 0; }
+  .printSlot { width: 40mm; height: 30mm; margin: 0; padding: 0; break-after: page; page-break-after: always; }
+  .printSlot:last-child { break-after: auto; page-break-after: auto; }
+  .thermalLabel { border: 0; width: 40mm; height: 20mm; }
+}
