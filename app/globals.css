@@ -1,6 +1,6 @@
 :root {
-  --brand-primary: #0f172a;
-  --brand-secondary: #e2e8f0;
+  --brand-primary: #111827;
+  --brand-secondary: #f3f4f6;
   --background: #f8fafc;
   --foreground: #0f172a;
   --muted: #64748b;
@@ -13,203 +13,129 @@
 html { scroll-behavior: smooth; }
 html, body { margin: 0; padding: 0; }
 body {
-  background:
-    radial-gradient(circle at top right, rgba(148, 163, 184, 0.12), transparent 30%),
-    var(--background);
+  background: var(--background);
   color: var(--foreground);
   font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
 }
-
 a { color: inherit; text-decoration: none; }
-button, a { -webkit-tap-highlight-color: transparent; }
+button { font: inherit; }
 
-.shell { min-height: 100vh; }
-.topbar {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 18px 28px;
+.appShell { min-height: 100vh; display: grid; grid-template-columns: 250px minmax(0, 1fr); }
+.sidebar {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  padding: 22px 16px;
   background: var(--brand-primary);
-  color: white;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
 }
-.brand { font-size: 20px; font-weight: 800; letter-spacing: -0.03em; }
-.badge { font-size: 12px; opacity: .8; }
-.main { max-width: 1180px; margin: 0 auto; padding: 48px 24px 64px; }
-
-.eyebrow {
-  display: inline-block;
-  margin-bottom: 10px;
-  color: #475569;
-  font-size: 12px;
-  font-weight: 800;
-  letter-spacing: .12em;
-  text-transform: uppercase;
-}
-
-.landingHero,
-.dashboardHero,
-.pricingShowcase {
+.storeBrand { display: flex; align-items: center; gap: 12px; padding: 4px 6px 22px; }
+.storeMark {
+  width: 42px;
+  height: 42px;
+  border-radius: 12px;
   display: grid;
-  grid-template-columns: minmax(0, 1.4fr) minmax(280px, .6fr);
-  gap: 36px;
-  align-items: center;
+  place-items: center;
+  background: rgba(255,255,255,.12);
+  font-weight: 900;
+  font-size: 20px;
 }
+.storeBrand strong, .storeBrand small { display: block; }
+.storeBrand strong { font-size: 15px; }
+.storeBrand small { margin-top: 3px; opacity: .65; font-size: 11px; }
+.navMenu { display: grid; gap: 4px; }
+.navItem { padding: 10px 12px; border-radius: 9px; color: rgba(255,255,255,.72); font-size: 13px; font-weight: 700; }
+.navItem:hover, .navItem.active { background: rgba(255,255,255,.11); color: #fff; }
+.sidebarFooter { margin-top: auto; padding: 14px 8px 4px; border-top: 1px solid rgba(255,255,255,.12); }
+.sidebarFooter span, .sidebarFooter small { display: block; }
+.sidebarFooter span { font-weight: 800; }
+.sidebarFooter small { margin-top: 3px; opacity: .55; font-size: 11px; }
 
-.landingHero { padding: 34px 0 54px; }
-.heroCopy h1,
-.dashboardHero h1 {
-  margin: 0;
-  max-width: 830px;
-  font-size: clamp(38px, 7vw, 68px);
-  line-height: 1.02;
-  letter-spacing: -.055em;
-}
-.heroCopy p,
-.dashboardHero p,
-.pricingShowcase p {
-  max-width: 760px;
-  color: var(--muted);
-  font-size: 17px;
-  line-height: 1.7;
-}
-.heroActions { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 26px; }
-.primaryButton,
-.secondaryButton {
+.contentArea { min-width: 0; }
+.dashboardPage { max-width: 1440px; margin: 0 auto; padding: 34px 34px 60px; }
+.pageHeader { display: flex; align-items: flex-start; justify-content: space-between; gap: 28px; margin-bottom: 22px; }
+.pageHeader h1 { margin: 0; font-size: clamp(30px, 4vw, 44px); letter-spacing: -.045em; }
+.pageHeader p { margin: 8px 0 0; color: var(--muted); }
+.eyebrow { display: inline-block; margin-bottom: 8px; color: var(--muted); font-size: 11px; font-weight: 900; letter-spacing: .12em; text-transform: uppercase; }
+.headerActions { display: flex; gap: 10px; flex-wrap: wrap; }
+.primaryButton, .secondaryButton {
+  min-height: 42px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  min-height: 46px;
-  padding: 0 18px;
-  border-radius: 12px;
-  font-weight: 800;
-  font-size: 14px;
-  cursor: pointer;
-}
-.primaryButton {
-  border: 1px solid var(--brand-primary);
-  background: var(--brand-primary);
-  color: white;
-}
-.secondaryButton {
-  border: 1px solid var(--border);
-  background: white;
-  color: var(--foreground);
-}
-
-.heroPanel,
-.priceBox,
-.kpiCard,
-.featureCard,
-.moduleCard,
-.noticeCard {
-  background: rgba(255,255,255,.96);
-  border: 1px solid var(--border);
-  box-shadow: 0 18px 50px rgba(15, 23, 42, .06);
-}
-.heroPanel {
-  padding: 24px;
-  border-radius: 22px;
-}
-.heroPanel > strong { display: block; font-size: 28px; margin: 6px 0 22px; }
-.panelLabel { color: var(--muted); font-size: 12px; font-weight: 700; text-transform: uppercase; }
-.panelRow {
-  display: flex;
-  justify-content: space-between;
-  gap: 18px;
-  padding: 13px 0;
-  border-top: 1px solid var(--border);
-  color: var(--muted);
-  font-size: 14px;
-}
-.panelRow b { color: var(--foreground); }
-
-.featureGrid,
-.kpiGrid,
-.moduleGrid {
-  display: grid;
-  gap: 16px;
-}
-.featureGrid { grid-template-columns: repeat(3, minmax(0, 1fr)); margin-bottom: 56px; }
-.featureCard { padding: 24px; border-radius: 18px; }
-.featureCard h2 { margin: 16px 0 8px; font-size: 20px; }
-.featureCard p { margin: 0; color: var(--muted); line-height: 1.6; }
-.featureNumber { color: #94a3b8; font-size: 12px; font-weight: 800; letter-spacing: .12em; }
-
-.pricingShowcase {
-  padding: 30px;
-  background: #0f172a;
-  color: white;
-  border-radius: 24px;
-}
-.pricingShowcase .eyebrow,
-.pricingShowcase p { color: #cbd5e1; }
-.pricingShowcase h2 { margin: 0; font-size: 32px; letter-spacing: -.03em; }
-.priceBox { padding: 22px; border-radius: 18px; color: var(--foreground); }
-.priceBox span, .priceBox small { display: block; color: var(--muted); }
-.priceBox strong { display: block; margin: 8px 0; font-size: 34px; letter-spacing: -.04em; }
-
-.siteFooter {
-  display: flex;
-  justify-content: space-between;
-  gap: 20px;
-  padding: 30px 0 4px;
-  color: var(--muted);
-  font-size: 13px;
-}
-.siteFooter strong { color: var(--foreground); }
-
-.dashboard { padding-top: 34px; }
-.dashboardHero { grid-template-columns: minmax(0, 1fr) auto; margin-bottom: 28px; }
-.dashboardHero h1 { font-size: clamp(34px, 5vw, 52px); }
-.kpiGrid { grid-template-columns: repeat(4, minmax(0, 1fr)); margin-bottom: 24px; }
-.kpiCard { padding: 20px; border-radius: 16px; }
-.kpiCard span, .kpiCard small { color: var(--muted); }
-.kpiCard span { display: block; font-size: 13px; font-weight: 700; }
-.kpiCard strong { display: block; margin: 10px 0 6px; font-size: 26px; letter-spacing: -.03em; }
-.kpiCard small { font-size: 12px; }
-
-.sectionBlock { margin-top: 24px; }
-.sectionHeading { display: flex; align-items: end; justify-content: space-between; gap: 20px; margin-bottom: 14px; }
-.sectionHeading h2, .noticeCard h2 { margin: 0; font-size: 26px; letter-spacing: -.03em; }
-.tenantTag { padding: 8px 10px; background: var(--soft); border-radius: 999px; color: #475569; font-size: 12px; font-weight: 700; }
-.moduleGrid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
-.moduleCard { display: flex; gap: 14px; padding: 18px; border-radius: 16px; }
-.moduleIcon {
-  flex: 0 0 38px;
-  width: 38px;
-  height: 38px;
-  display: grid;
-  place-items: center;
+  padding: 0 15px;
   border-radius: 10px;
-  background: var(--brand-primary);
-  color: white;
+  font-size: 13px;
   font-weight: 800;
 }
-.moduleCard h3 { margin: 1px 0 6px; font-size: 16px; }
-.moduleCard p { margin: 0; color: var(--muted); font-size: 13px; line-height: 1.5; }
-.noticeCard { padding: 22px; border-radius: 18px; }
-.noticeCard p { margin-bottom: 0; color: var(--muted); line-height: 1.6; }
+.primaryButton { background: var(--brand-primary); color: #fff; }
+.secondaryButton { background: #fff; border: 1px solid var(--border); }
 
-@media (max-width: 900px) {
-  .landingHero,
-  .pricingShowcase { grid-template-columns: 1fr; }
-  .featureGrid,
-  .moduleGrid { grid-template-columns: 1fr 1fr; }
-  .kpiGrid { grid-template-columns: 1fr 1fr; }
+.periodBar { display: inline-flex; gap: 4px; margin-bottom: 18px; padding: 4px; border: 1px solid var(--border); background: #fff; border-radius: 11px; }
+.periodButton { border: 0; background: transparent; color: var(--muted); padding: 8px 12px; border-radius: 8px; cursor: pointer; font-size: 12px; font-weight: 800; }
+.periodButton.active { background: var(--brand-primary); color: #fff; }
+
+.kpiGrid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 14px; margin-bottom: 18px; }
+.kpiCard, .panelCard, .pricingCard, .moduleCard, .implementationNotice { background: #fff; border: 1px solid var(--border); box-shadow: 0 10px 28px rgba(15,23,42,.035); }
+.kpiCard { padding: 18px; border-radius: 14px; }
+.kpiCard span { display: block; color: var(--muted); font-size: 12px; font-weight: 800; }
+.kpiCard strong { display: block; margin: 10px 0 5px; font-size: 25px; letter-spacing: -.03em; }
+.kpiCard small { color: #94a3b8; font-size: 11px; }
+
+.dashboardGrid { display: grid; grid-template-columns: minmax(0, 1.7fr) minmax(260px, .7fr); gap: 14px; }
+.panelCard { border-radius: 15px; padding: 20px; }
+.panelHeader { display: flex; justify-content: space-between; gap: 18px; align-items: flex-start; }
+.panelHeader h2, .panelCard h2, .sectionTitle h2 { margin: 0; font-size: 21px; letter-spacing: -.025em; }
+.panelHeader a, .textLink { color: #475569; font-size: 12px; font-weight: 800; }
+.emptyState { min-height: 160px; display: grid; place-content: center; text-align: center; color: var(--muted); }
+.emptyState strong { color: var(--foreground); }
+.emptyState p { margin: 6px auto 0; max-width: 420px; font-size: 13px; line-height: 1.6; }
+.stockSummary { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 20px 0; }
+.stockSummary div { padding: 14px; background: var(--soft); border-radius: 12px; }
+.stockSummary strong, .stockSummary span { display: block; }
+.stockSummary strong { font-size: 26px; }
+.stockSummary span { margin-top: 4px; color: var(--muted); font-size: 11px; }
+
+.sectionBlock { margin-top: 30px; scroll-margin-top: 20px; }
+.sectionTitle { display: flex; align-items: end; justify-content: space-between; gap: 20px; margin-bottom: 12px; }
+.formulaBadge { padding: 8px 10px; border-radius: 999px; background: var(--soft); color: #475569; font-size: 11px; font-weight: 800; }
+.pricingCard { display: grid; grid-template-columns: minmax(0, 1fr) 260px; gap: 24px; align-items: center; padding: 22px; border-radius: 15px; }
+.pricingCard h3 { margin: 0 0 8px; font-size: 17px; }
+.pricingCard p { margin: 0; max-width: 760px; color: var(--muted); font-size: 13px; line-height: 1.6; }
+.priceExample { padding: 16px; background: var(--brand-primary); color: #fff; border-radius: 12px; }
+.priceExample span, .priceExample small { display: block; opacity: .72; }
+.priceExample span { font-size: 11px; font-weight: 800; }
+.priceExample strong { display: block; margin: 8px 0 4px; font-size: 28px; }
+.priceExample small { font-size: 10px; }
+
+.moduleGrid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; }
+.moduleCard { display: flex; gap: 12px; padding: 16px; border-radius: 14px; scroll-margin-top: 20px; }
+.moduleNumber { flex: 0 0 auto; color: #94a3b8; font-size: 11px; font-weight: 900; }
+.moduleCard h3 { margin: 0 0 6px; font-size: 15px; }
+.moduleCard p { margin: 0; color: var(--muted); font-size: 12px; line-height: 1.5; }
+
+.implementationNotice { margin-top: 28px; padding: 18px 20px; border-radius: 14px; border-left: 4px solid var(--brand-primary); }
+.implementationNotice strong { display: block; margin-bottom: 5px; }
+.implementationNotice p { margin: 0; color: var(--muted); font-size: 12px; line-height: 1.6; }
+
+@media (max-width: 1100px) {
+  .appShell { grid-template-columns: 210px minmax(0, 1fr); }
+  .kpiGrid, .moduleGrid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
 
-@media (max-width: 640px) {
-  .topbar { padding: 15px 18px; }
-  .badge { display: none; }
-  .main { padding: 30px 18px 44px; }
-  .landingHero { padding-top: 18px; }
-  .heroCopy h1,
-  .dashboardHero h1 { font-size: 38px; }
-  .featureGrid,
-  .moduleGrid,
-  .kpiGrid { grid-template-columns: 1fr; }
-  .dashboardHero { grid-template-columns: 1fr; }
-  .dashboardHero .primaryButton { width: 100%; }
-  .sectionHeading { align-items: start; flex-direction: column; }
-  .siteFooter { flex-direction: column; }
+@media (max-width: 760px) {
+  .appShell { display: block; }
+  .sidebar { position: static; height: auto; padding: 14px; }
+  .storeBrand { padding-bottom: 12px; }
+  .navMenu { display: flex; overflow-x: auto; padding-bottom: 3px; }
+  .navItem { white-space: nowrap; }
+  .sidebarFooter { display: none; }
+  .dashboardPage { padding: 24px 16px 40px; }
+  .pageHeader { flex-direction: column; }
+  .headerActions { width: 100%; }
+  .headerActions a { flex: 1; }
+  .kpiGrid, .dashboardGrid, .moduleGrid, .pricingCard { grid-template-columns: 1fr; }
+  .sectionTitle { align-items: flex-start; flex-direction: column; }
 }
