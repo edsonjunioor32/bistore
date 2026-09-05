@@ -56,8 +56,8 @@ export type StockMovement = {
   createdAt: string;
 };
 
-export type SaleItem = { id: string; productId: string; sku: string; name: string; color: string; size: string; quantity: number; unitPriceCents: number; discountCents: number };
-export type SalePayment = { id: string; method: PaymentMethod; valueCents: number; installments: number; operatorFeeCents: number };
+export type SaleItem = { id?: string; productId: string; sku: string; name: string; color: string; size: string; quantity: number; unitPriceCents: number; discountCents: number };
+export type SalePayment = { id?: string; method: PaymentMethod; valueCents: number; installments: number; operatorFeeCents: number };
 export type Sale = {
   id: string;
   number: string;
