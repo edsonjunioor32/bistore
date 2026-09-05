@@ -39,7 +39,8 @@ export default function AuthGate() {
     event.preventDefault();
     const supabase = getSupabaseBrowserClient();
     if (!supabase) return;
-    const redirectTo = `${window.location.origin}${process.env.NEXT_PUBLIC_BASE_PATH ?? ""}/redefinir-senha/`;
+    const base = new URL("./", window.location.href);
+    const redirectTo = new URL("redefinir-senha/", base).href;
     const { error } = await supabase.auth.resetPasswordForEmail(email, { redirectTo });
     setMessage(error ? "Não foi possível enviar o link de redefinição." : "Se o e-mail estiver cadastrado, enviaremos um link para redefinir a senha.");
   }
