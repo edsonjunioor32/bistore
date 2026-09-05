@@ -1,0 +1,10 @@
+.authPage { min-height:100vh; display:grid; place-items:center; padding:24px; background:linear-gradient(135deg,#f8fafc 0%,#eef2f7 100%); }
+.authCard { width:min(430px,100%); padding:28px; background:#fff; border:1px solid #e5e7eb; border-radius:18px; box-shadow:0 24px 60px rgba(15,23,42,.09); }
+.authBrand { display:flex; align-items:center; gap:10px; margin-bottom:24px; }
+.authBrand > span { width:40px; height:40px; display:grid; place-items:center; border-radius:11px; background:#111827; color:#fff; font-weight:900; }
+.authBrand strong, .authBrand small { display:block; }
+.authBrand small { margin-top:2px; color:#64748b; font-size:10px; }
+.authCard h1 { margin:0; font-size:30px; letter-spacing:-.04em; }
+.authCard > p { margin:7px 0 22px; color:#64748b; font-size:12px; line-height:1.55; }
+.authMessage { padding:10px 12px; border-radius:9px; background:#f1f5f9; color:#475569; font-size:11px; line-height:1.5; }
+.authLink { display:block; margin:16px auto 0; text-align:center; }
