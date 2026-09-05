@@ -56,8 +56,8 @@ export type StockMovement = {
   createdAt: string;
 };
 
-export type SaleItem = { productId: string; sku: string; name: string; color: string; size: string; quantity: number; unitPriceCents: number; discountCents: number };
-export type SalePayment = { method: PaymentMethod; valueCents: number; installments: number; operatorFeeCents: number };
+export type SaleItem = { id: string; productId: string; sku: string; name: string; color: string; size: string; quantity: number; unitPriceCents: number; discountCents: number };
+export type SalePayment = { id: string; method: PaymentMethod; valueCents: number; installments: number; operatorFeeCents: number };
 export type Sale = {
   id: string;
   number: string;
@@ -111,11 +111,16 @@ export const emptyAppData: AppData = {
   audit: [],
 };
 
-export const storageKey = "bistore.single-store.v1";
+export const storageKey = "bistore.single-store.v2";
 
-export function makeId(prefix: string) {
-  const suffix = typeof crypto !== "undefined" && "randomUUID" in crypto ? crypto.randomUUID() : Math.random().toString(36).slice(2);
-  return `${prefix}_${suffix}`;
+export function makeId(_prefix?: string) {
+  if (typeof crypto !== "undefined" && "randomUUID" in crypto) return crypto.randomUUID();
+  const hex = "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx";
+  return hex.replace(/[xy]/g, (char) => {
+    const random = Math.floor(Math.random() * 16);
+    const value = char === "x" ? random : (random & 0x3) | 0x8;
+    return value.toString(16);
+  });
 }
 
 export function nowIso() {
