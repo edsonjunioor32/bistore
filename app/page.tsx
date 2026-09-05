@@ -1,9 +1,18 @@
-import Link from "next/link";
 import { calculateMinimumPrice, formatMoney } from "@/lib/pricing";
-import { getDefaultStore } from "@/lib/store";
+import { storeConfig } from "@/lib/store";
 
-export default async function Home() {
-  const store = await getDefaultStore();
+const modules = [
+  ["produtos", "Produtos", "Cadastre modelos, cores, tamanhos, SKU, custos e preços."],
+  ["estoque", "Estoque", "Controle entradas, saídas, ajustes, trocas, devoluções e estoque mínimo."],
+  ["vendas", "Vendas", "Registre vendas, itens, canais, pagamentos, parcelas e cancelamentos."],
+  ["despesas", "Despesas", "Crie lotes por compra, informe gastos, rateio por peça e markup."],
+  ["relatorios", "Relatórios", "Consulte estoque e vendas por período e exporte CSV/PDF."],
+  ["usuarios", "Usuários", "Gerencie administradores e vendedores da loja."],
+  ["auditoria", "Auditoria", "Acompanhe o histórico de alterações e operações realizadas."],
+  ["configuracoes", "Configurações", "Defina dados da loja, identidade visual, Telegram e preferências."],
+] as const;
+
+export default function Home() {
   const pricing = calculateMinimumPrice({
     costCents: 3500,
     expensesTotalCents: 48557,
@@ -12,83 +21,125 @@ export default async function Home() {
   });
 
   return (
-    <main className="main landing">
-      <section className="landingHero">
-        <div className="heroCopy">
-          <span className="eyebrow">Bistore · gestão white label</span>
-          <h1>Estoque, vendas e precificação em um único sistema.</h1>
-          <p>
-            Uma base multi-loja criada para pequenos varejistas controlarem produtos,
-            variações, estoque, vendas, despesas, usuários, relatórios e integrações sem
-            misturar os dados de cada operação.
-          </p>
-          <div className="heroActions">
-            <Link className="primaryButton linkButton" href="/loja/demo/">
-              Acessar demonstração
-            </Link>
-            <a className="secondaryButton" href="https://github.com/edsonjunioor32/bistore">
-              Ver projeto no GitHub
-            </a>
-          </div>
-        </div>
-        <div className="heroPanel" aria-label="Resumo da plataforma">
-          <span className="panelLabel">Loja de demonstração</span>
-          <strong>{store.branding.name}</strong>
-          <div className="panelRow">
-            <span>Arquitetura</span>
-            <b>Multi-tenant</b>
-          </div>
-          <div className="panelRow">
-            <span>Dados por loja</span>
-            <b>Isolados</b>
-          </div>
-          <div className="panelRow">
-            <span>Moeda</span>
-            <b>{store.branding.currency}</b>
-          </div>
-        </div>
-      </section>
-
-      <section className="featureGrid" aria-label="Recursos principais">
-        <article className="featureCard">
-          <span className="featureNumber">01</span>
-          <h2>Estoque por variação</h2>
-          <p>Produtos organizados por modelo, cor, tamanho e SKU, com histórico de movimentações.</p>
-        </article>
-        <article className="featureCard">
-          <span className="featureNumber">02</span>
-          <h2>Vendas e pagamentos</h2>
-          <p>Registro de vendas, parcelas, canais, formas de pagamento, cancelamentos e devoluções.</p>
-        </article>
-        <article className="featureCard">
-          <span className="featureNumber">03</span>
-          <h2>Lotes de despesas</h2>
-          <p>Cada compra pode usar seu próprio lote de custos, quantidade para rateio e markup.</p>
-        </article>
-      </section>
-
-      <section className="pricingShowcase">
+    <main className="dashboardPage" id="dashboard">
+      <header className="pageHeader">
         <div>
-          <span className="eyebrow">Exemplo de precificação</span>
-          <h2>Regra simples, histórica e rastreável.</h2>
-          <p>
-            O Bistore preserva a fórmula consolidada do projeto: despesa por peça +
-            (custo × markup). O lote escolhido fica vinculado ao produto.
-          </p>
+          <span className="eyebrow">Painel principal</span>
+          <h1>Olá, {storeConfig.name}</h1>
+          <p>Acompanhe estoque, vendas e indicadores da sua loja em um único lugar.</p>
         </div>
-        <div className="priceBox">
-          <span>Preço mínimo calculado</span>
-          <strong>
-            {formatMoney(pricing.minimumPriceCents, store.branding.locale, store.branding.currency)}
-          </strong>
-          <small>Exemplo demonstrativo, sem dados reais de loja.</small>
+        <div className="headerActions">
+          <a className="secondaryButton" href="#produtos">Novo produto</a>
+          <a className="primaryButton" href="#vendas">Nova venda</a>
+        </div>
+      </header>
+
+      <section className="periodBar" aria-label="Período do dashboard">
+        <button className="periodButton active" type="button">Hoje</button>
+        <button className="periodButton" type="button">7 dias</button>
+        <button className="periodButton" type="button">Este mês</button>
+      </section>
+
+      <section className="kpiGrid" aria-label="Indicadores principais">
+        <article className="kpiCard">
+          <span>Vendas</span>
+          <strong>0</strong>
+          <small>no período selecionado</small>
+        </article>
+        <article className="kpiCard">
+          <span>Faturamento bruto</span>
+          <strong>R$ 0,00</strong>
+          <small>total vendido</small>
+        </article>
+        <article className="kpiCard">
+          <span>Valor líquido</span>
+          <strong>R$ 0,00</strong>
+          <small>após taxas registradas</small>
+        </article>
+        <article className="kpiCard">
+          <span>Ticket médio</span>
+          <strong>R$ 0,00</strong>
+          <small>por venda</small>
+        </article>
+      </section>
+
+      <section className="dashboardGrid">
+        <article className="panelCard wideCard">
+          <div className="panelHeader">
+            <div>
+              <span className="eyebrow">Resumo de vendas</span>
+              <h2>Vendas recentes</h2>
+            </div>
+            <a href="#vendas">Ver vendas</a>
+          </div>
+          <div className="emptyState">
+            <strong>Nenhuma venda registrada</strong>
+            <p>As vendas da loja aparecerão aqui assim que a base de dados estiver conectada.</p>
+          </div>
+        </article>
+
+        <article className="panelCard">
+          <span className="eyebrow">Estoque</span>
+          <h2>Atenção necessária</h2>
+          <div className="stockSummary">
+            <div><strong>0</strong><span>Estoque baixo</span></div>
+            <div><strong>0</strong><span>Sem estoque</span></div>
+          </div>
+          <a className="textLink" href="#estoque">Abrir estoque</a>
+        </article>
+      </section>
+
+      <section className="sectionBlock" id="despesas">
+        <div className="sectionTitle">
+          <div>
+            <span className="eyebrow">Precificação</span>
+            <h2>Lotes de despesas</h2>
+          </div>
+          <span className="formulaBadge">despesa/peça + (custo × markup)</span>
+        </div>
+        <div className="pricingCard">
+          <div>
+            <h3>Regra preservada da LLL Essence</h3>
+            <p>
+              Cada produto fica vinculado ao lote de despesas escolhido no cadastro. Compras futuras
+              não alteram retroativamente a precificação dos produtos anteriores.
+            </p>
+          </div>
+          <div className="priceExample">
+            <span>Exemplo de preço mínimo</span>
+            <strong>{formatMoney(pricing.minimumPriceCents, storeConfig.locale, storeConfig.currency)}</strong>
+            <small>valor demonstrativo, sem dados reais</small>
+          </div>
         </div>
       </section>
 
-      <footer className="siteFooter">
-        <strong>Bistore</strong>
-        <span>Base white label para gestão de estoque e vendas.</span>
-      </footer>
+      <section className="sectionBlock" aria-label="Módulos do sistema">
+        <div className="sectionTitle">
+          <div>
+            <span className="eyebrow">Sistema</span>
+            <h2>Módulos da loja</h2>
+          </div>
+        </div>
+        <div className="moduleGrid">
+          {modules.map(([id, title, description], index) => (
+            <article className="moduleCard" id={id} key={id}>
+              <span className="moduleNumber">{String(index + 1).padStart(2, "0")}</span>
+              <div>
+                <h3>{title}</h3>
+                <p>{description}</p>
+              </div>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      <section className="implementationNotice">
+        <strong>Instalação independente</strong>
+        <p>
+          Este repositório representa uma única loja. Para usar o sistema em outra empresa, duplique
+          o repositório, conecte uma nova base de dados e altere apenas os dados e a identidade da loja.
+        </p>
+      </section>
     </main>
   );
 }
