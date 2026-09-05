@@ -1,8 +1,8 @@
-export type Role = "super_admin" | "store_admin" | "seller";
+export type Role = "admin" | "seller";
 
-export type StoreBranding = {
+export type StoreConfig = {
   name: string;
-  slug: string;
+  legalName?: string;
   logoUrl?: string;
   faviconUrl?: string;
   primaryColor: string;
@@ -16,15 +16,8 @@ export type StoreBranding = {
   instagram?: string;
 };
 
-export type Store = {
-  id: string;
-  active: boolean;
-  branding: StoreBranding;
-};
-
 export type ExpenseBatch = {
   id: string;
-  storeId: string;
   name: string;
   purchaseDate: string;
   itemCount: number;
@@ -34,7 +27,6 @@ export type ExpenseBatch = {
 
 export type ProductVariant = {
   id: string;
-  storeId: string;
   productId: string;
   sku: string;
   color?: string;
