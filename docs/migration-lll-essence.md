@@ -1,77 +1,57 @@
-# Migração da LLL Essence para o Bistore
+# Referência funcional: LLL Essence
 
 ## Objetivo
 
-Migrar a loja existente para o Bistore como primeiro tenant sem apagar, duplicar ou recalcular indevidamente dados históricos.
+O Bistore deve reproduzir a estrutura e as regras funcionais consolidadas na LLL Essence, mas sem carregar o nome, identidade visual ou dados reais daquela loja.
 
-## O que deve ser preservado
+A LLL Essence é a **referência de funcionamento**. O Bistore é o **template reutilizável**.
+
+## O que o template deve oferecer
 
 - produtos e variações
-- SKUs
-- estoque atual
-- movimentações
-- vendas históricas
+- SKUs por modelo/cor/tamanho
+- estoque atual e movimentações
+- entradas, saídas, ajustes, reservas, trocas e devoluções
+- vendas e itens
 - pagamentos e parcelas
 - canais de venda
-- lotes de despesas
+- lotes independentes de despesas
 - despesas por lote
 - markup por lote
 - vínculo produto/lote
-- preços mínimos já consolidados
-- usuários e permissões
+- precificação mínima
+- dashboard e indicadores
+- relatórios CSV/PDF com totalizadores
+- usuários administrador/vendedor
 - auditoria
-- configurações do Telegram
+- recuperação de senha
+- Telegram
+- configurações e identidade da loja
 
-## Regra de precificação a preservar
+## Regra definitiva de precificação
 
 `despesa por peça + (custo × markup)`
 
-A migração não deve voltar à fórmula anterior em que a despesa também era multiplicada pelo markup.
+A despesa rateada não é multiplicada pelo markup.
 
-## Estratégia
+Exemplo consolidado:
 
-### 1. Criar o tenant
+`R$ 8,23 + (R$ 35,00 × 1,6) = R$ 64,23`
 
-Criar `stores` com slug sugerido `lll-essence` e copiar somente os dados de identidade/configuração da loja.
+## Dados históricos
 
-### 2. Criar usuários
+O template Bistore não deve conter os produtos, vendas, estoque, despesas ou usuários reais da LLL Essence. Uma instalação nova começa vazia e recebe apenas os cadastros da nova loja.
 
-Mapear os usuários existentes para `user_profiles` e `store_users`.
+Se algum dia a base da LLL Essence for importada para uma instalação própria do Bistore, vendas históricas não podem executar nova baixa de estoque, pois o saldo de origem já as considera.
 
-### 3. Migrar lotes antes dos produtos
+## Forma de reutilização
 
-Os lotes precisam existir antes das variações para que `expense_batch_id` seja preservado.
+Cada nova loja deve ter:
 
-### 4. Migrar produtos e variações
+1. um repositório próprio, criado a partir do Bistore;
+2. uma base de dados própria;
+3. sua própria configuração visual e cadastral;
+4. seus próprios usuários e credenciais;
+5. suas próprias integrações.
 
-Para cada variação, preservar SKU, custo, preço de venda, preço mínimo, estoque disponível/reservado e lote.
-
-### 5. Migrar vendas sem baixar estoque novamente
-
-Vendas históricas devem ser importadas como histórico. O processo de importação não pode executar a rotina normal de baixa de estoque, pois o estoque atual já reflete essas vendas.
-
-### 6. Migrar movimentações/auditoria
-
-Quando a origem permitir, preservar datas, autores e referências.
-
-### 7. Validar antes do corte
-
-Comparar origem e destino:
-
-- quantidade de produtos
-- quantidade de variações
-- saldo por SKU
-- total de vendas por período
-- total vendido
-- total líquido
-- quantidade de lotes
-- despesas por lote
-- preços mínimos
-
-## Idempotência
-
-Toda importação deve possuir chave de origem ou tabela de controle de migração para que uma segunda execução não crie vendas, pagamentos ou movimentações duplicadas.
-
-## Dados reais
-
-Nenhum dado real da LLL Essence foi incluído neste repositório. Para executar a migração será necessário acesso à base, exportação ou API da versão atualmente publicada.
+Nenhum dado precisa de `store_id`, porque a separação ocorre por instalação/repositório/banco.
