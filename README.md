@@ -1,43 +1,49 @@
 # Bistore
 
-Bistore é uma plataforma white label para controle de estoque, vendas, pagamentos, despesas e precificação de múltiplas lojas.
+Bistore é um template reutilizável para controle de estoque e vendas de **uma única loja por instalação**.
 
-## Objetivo
+O objetivo é preservar a estrutura e as funcionalidades consolidadas no projeto LLL Essence, mas sem deixar nome, identidade visual ou dados daquela loja fixos no código.
 
-Uma única aplicação deve atender várias lojas (tenants), mantendo dados, usuários, branding, integrações e relatórios isolados por loja.
+## Como reutilizar para outra loja
 
-A LLL Essence pode ser migrada como o primeiro tenant sem misturar seus dados com outras lojas.
+Para criar uma nova instalação:
 
-## Funcionalidades preservadas do projeto original
+1. Duplique este repositório para um novo repositório.
+2. Crie/conecte uma nova base de dados.
+3. Configure nome, logo, cores, contatos e demais dados da nova loja.
+4. Cadastre os usuários, produtos, estoque, lotes de despesas e integrações daquela empresa.
+5. Publique a nova instalação.
 
-- Produtos e variações por SKU, cor, tamanho e modelo
+Cada repositório e cada banco pertencem a somente uma loja. Não existe seletor de lojas, `store_id`, tenant ou painel de super administrador.
+
+## Funcionalidades de referência da LLL Essence
+
+- Dashboard com vendas, faturamento, valor líquido e ticket médio
+- Produtos e variações por SKU, modelo, cor e tamanho
 - Entradas, saídas, ajustes, reservas, trocas, devoluções, perdas e avarias
-- Vendas, pagamentos, parcelas, canais e status
-- Lotes de despesas por compra
+- Vendas, pagamentos, parcelas, canais e cancelamentos
+- Lotes de despesas independentes por compra
 - Precificação por lote usando `despesa por peça + (custo × markup)`
-- Relatórios e totalizadores
-- Usuários e permissões
+- Relatórios de vendas e estoque com totalizadores
+- Exportação CSV e PDF
+- Administrador e vendedor
 - Auditoria
 - Recuperação de senha
-- Integração Telegram por loja
-- Interface preparada para branding white label
+- Integração Telegram
+- Configuração de identidade e dados da loja
 
-## Arquitetura white label
+## Configuração da loja
 
-Cada registro operacional pertence a um `store_id`. O isolamento deve ser aplicado no banco e no backend, nunca apenas na interface.
+Os dados iniciais ficam em variáveis `NEXT_PUBLIC_STORE_*`, documentadas no `.env.example`. A evolução prevista é permitir que os mesmos dados sejam editados pelo menu **Configurações** e persistidos na tabela `store_settings`.
 
-Perfis iniciais:
-
-- `super_admin`: administra a plataforma
-- `store_admin`: administra apenas uma loja
-- `seller`: opera estoque e vendas da loja
-
-## Stack inicial
+## Stack
 
 - Next.js + TypeScript
 - PostgreSQL / Supabase compatível
-- CSS com variáveis de tema por tenant
-- API Routes / Server Components
+- Autenticação por Supabase Auth ou equivalente
+- API Routes / Server Actions
+- Telegram Bot API por webhook
+- Resend ou equivalente para recuperação de senha
 
 ## Desenvolvimento
 
@@ -49,13 +55,6 @@ npm run dev
 
 Acesse `http://localhost:3000`.
 
-## Estrutura
+## Publicação atual
 
-- `app/` — aplicação web
-- `lib/` — domínio, tenant, branding e precificação
-- `db/` — modelo SQL multi-tenant
-- `docs/` — arquitetura e plano de migração
-
-## Estado atual
-
-Este repositório contém a fundação white label do Bistore. O histórico funcional do sistema anterior foi usado como referência para preservar as regras já definidas. A migração dos dados reais da LLL Essence deve ser feita somente quando houver acesso à base/origem desses dados.
+O GitHub Pages serve como prévia visual estática. Para reproduzir integralmente a LLL Essence com autenticação, banco, operações de estoque, vendas, e-mail e webhook do Telegram, a instalação de produção deve usar uma hospedagem com backend (por exemplo Vercel) e PostgreSQL/Supabase.
