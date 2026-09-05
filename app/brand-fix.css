@@ -1,0 +1,32 @@
+.logoDot {
+  background-image: var(--brand-logo-url) !important;
+  background-size: cover !important;
+  background-position: center !important;
+  background-repeat: no-repeat !important;
+  color: transparent !important;
+}
+
+.authBrand {
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.authBrand > span {
+  width: 168px !important;
+  height: 96px !important;
+  display: block !important;
+  flex: 0 0 auto;
+  border-radius: 14px !important;
+  color: transparent !important;
+  background-color: #efc9ba !important;
+  background-image: var(--brand-logo-url) !important;
+  background-size: cover !important;
+  background-position: center !important;
+  background-repeat: no-repeat !important;
+  box-shadow: 0 10px 24px rgba(116, 66, 58, .12);
+}
+
+@media (max-width: 760px) {
+  .logoDot { height: 86px !important; }
+  .authBrand > span { width: 145px !important; height: 83px !important; }
+}
