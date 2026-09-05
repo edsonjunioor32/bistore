@@ -52,7 +52,7 @@ export default function AuthGate() {
   return (
     <main className="authPage">
       <section className="authCard">
-        <div className="authBrand"><span>B</span><div><strong>Bistore</strong><small>Gestão de estoque e vendas</small></div></div>
+        <div className="authBrand"><span aria-label="Logo Bi Store">B</span><div><strong>Bi Store</strong><small>Gestão de estoque e vendas</small></div></div>
         <h1>{recovery ? "Redefinir senha" : "Entrar"}</h1>
         <p>{recovery ? "Informe o e-mail cadastrado para receber o link seguro de redefinição." : "Acesse o sistema com seu e-mail e senha."}</p>
         <form className="formStack" onSubmit={recovery ? sendRecovery : signIn}>
