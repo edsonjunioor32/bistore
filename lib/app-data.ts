@@ -89,13 +89,13 @@ export type AppData = {
 };
 
 export const defaultSettings: StoreSettings = {
-  name: "Minha Loja",
-  primaryColor: "#111827",
-  secondaryColor: "#f3f4f6",
+  name: "Bi Store",
+  primaryColor: "#1D1C1B",
+  secondaryColor: "#E76C5F",
   email: "",
   phone: "",
   whatsapp: "",
-  instagram: "",
+  instagram: "@bi_storeuse",
   timezone: "America/Fortaleza",
   currency: "BRL",
   locale: "pt-BR",
@@ -111,7 +111,8 @@ export const emptyAppData: AppData = {
   audit: [],
 };
 
-export const storageKey = "bistore.single-store.v2";
+// A nova chave garante que esta instalação comece vazia já com a identidade da Bi Store.
+export const storageKey = "bistore.single-store.v3";
 
 export function makeId(_prefix?: string) {
   if (typeof crypto !== "undefined" && "randomUUID" in crypto) return crypto.randomUUID();
