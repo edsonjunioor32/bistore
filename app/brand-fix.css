@@ -1,9 +1,12 @@
 .logoDot {
+  background-color: #efc9ba !important;
   background-image: var(--brand-logo-url) !important;
-  background-size: cover !important;
+  background-size: contain !important;
   background-position: center !important;
   background-repeat: no-repeat !important;
   color: transparent !important;
+  border: 1px solid rgba(255,255,255,.58);
+  box-shadow: inset 0 0 0 1px rgba(29,28,27,.03);
 }
 
 .authBrand {
@@ -20,9 +23,10 @@
   color: transparent !important;
   background-color: #efc9ba !important;
   background-image: var(--brand-logo-url) !important;
-  background-size: cover !important;
+  background-size: contain !important;
   background-position: center !important;
   background-repeat: no-repeat !important;
+  border: 1px solid rgba(231,108,95,.18);
   box-shadow: 0 10px 24px rgba(116, 66, 58, .12);
 }
 
