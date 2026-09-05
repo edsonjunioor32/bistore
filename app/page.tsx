@@ -1,5 +1,5 @@
-import BistoreApp from "@/components/BistoreApp";
+import AuthGate from "@/components/AuthGate";
 
 export default function Home() {
-  return <BistoreApp />;
+  return <AuthGate />;
 }
