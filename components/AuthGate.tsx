@@ -2,7 +2,7 @@
 
 import { FormEvent, useEffect, useState } from "react";
 import type { Session } from "@supabase/supabase-js";
-import BistoreApp from "@/components/BistoreApp";
+import BistoreWithLabels from "@/components/BistoreWithLabels";
 import { getSupabaseBrowserClient, isSupabaseConfigured } from "@/lib/supabase-client";
 
 export default function AuthGate() {
@@ -45,9 +45,9 @@ export default function AuthGate() {
     setMessage(error ? "Não foi possível enviar o link de redefinição." : "Se o e-mail estiver cadastrado, enviaremos um link para redefinir a senha.");
   }
 
-  if (!configured) return <BistoreApp />;
+  if (!configured) return <BistoreWithLabels />;
   if (loading) return <main className="appLoading">Validando acesso…</main>;
-  if (session) return <BistoreApp />;
+  if (session) return <BistoreWithLabels />;
 
   return (
     <main className="authPage">
